@@ -15,7 +15,7 @@ namespace Maxian_Robert_Lab5.Controllers
     {
         private readonly ExpenseContext _context;
 
-        public ExpensesController(ExpenseContext context) 
+        public ExpensesController(ExpenseContext context)  
         {
             _context = context;
         }
