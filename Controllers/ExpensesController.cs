@@ -15,28 +15,29 @@ namespace Maxian_Robert_Lab5.Controllers
     {
         private readonly ExpenseContext _context;
 
-        public ExpensesController(ExpenseContext context)  
+        public ExpensesController(ExpenseContext context)
         {
             _context = context;
         }
 
-       
-
-        // GET: api/Expenses/5
-        [HttpGet("{id}")]
+        // GET: api/Expenses
+        [HttpGet]
         public async Task<ActionResult<IEnumerable<ExpenseDTO>>> GetExpense()
         {
             return await _context.ExpenseDTO.ToListAsync();
         }
+
         // GET: api/Expenses/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ExpenseDTO>> GetExpense(int id)
         {
             var expense = await _context.ExpenseDTO.FindAsync(id);
+
             if (expense == null)
             {
                 return NotFound();
             }
+
             return expense;
         }
 
@@ -44,7 +45,7 @@ namespace Maxian_Robert_Lab5.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutExpense(int id, Expense expense)
+        public async Task<IActionResult> PutExpense(int id, ExpenseDTO expense)
         {
             if (id != expense.Id)
             {
@@ -81,12 +82,12 @@ namespace Maxian_Robert_Lab5.Controllers
             _context.ExpenseDTO.Add(expense);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction (nameof(GetExpense), new { id = expense.Id }, expense);
+            return CreatedAtAction("GetExpense", new { id = expense.Id }, expense);
         }
 
         // DELETE: api/Expenses/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<ExpenseDTO>> DeleteExpense(int id) 
+        public async Task<ActionResult<ExpenseDTO>> DeleteExpense(int id)
         {
             var expense = await _context.ExpenseDTO.FindAsync(id);
             if (expense == null)
