@@ -16,6 +16,7 @@ namespace Maxian_Robert_Lab5.Models
 
         public DbSet<Expense> Expense { get; set; }
         public DbSet<ExpenseDTO> ExpenseDTO { get; set; }
+        public DbSet<Budget> Budget { get; set; }
 
 
     }
